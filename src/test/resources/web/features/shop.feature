@@ -5,22 +5,26 @@ Feature: As a potential client I need to use the Shop.
     Given the client is on automationtesting page
     When the client clicks on Shop button
 
-  @categories
-  Scenario: Filter By Categories - HTML option
-    When the client clicks on HTML from Product Categories
-    Then the client can view products from HTML category
+   @TaxFunctionality
+  Scenario Outline: Tax Functionality
+      When the client clicks on Add to Basket button on a product
+      When the client clicks on Item button on navbar
+      When the client clicks on Proceed to Checkout button
+      When the client enter <country> on country textbox
+      Then tax rate should be <percentage>% for <country>
 
-  @Sort
-  Scenario Outline: Sort by <filter>
-    When the client clicks on <option> the sorting dropdown
-    Then the client can view the products sorted by <filter>
+      Examples:
+        | country   | percentage |
+        | India     | 2          |
+        | Argentina | 5          |
 
-    Examples:
-      | filter      | option                     |
-      | low to high | Sort by price: low to high |
-      | high to low | Sort by price: high to low |
 
-  @sale
-  Scenario: Sale Functionality
-    When the client clicks on a product with Sale! tag
-    Then the client can view both sale price and full price
+  @MenuItemLink
+      Scenario: View Basket through Item link
+        When the client clicks on Add to Basket button on a product
+        When the client clicks on Item button on navbar
+        When the client clicks on Proceed to Checkout button
+        When the client enters their details in the billing form
+        When the client choose check payment method
+        When the client clicks on Place Order button
+        Then Order Details are shown

@@ -3,20 +3,28 @@ Feature: As a potential client I need to navigate the Home Page
 
   Background:
     Given the client is on automationtesting page
-    When the client clicks on Shop button
-    When the client clicks on Home button
 
-  @arrivals @tp3
-  Scenario: Home page with three Arrivals only
-    Then the client can view the three Arrivals
-
-  @arrivals
-  Scenario: Images in Arrivals should navigate
+  @CheckTotalAndSubtotal
+  Scenario: Add to Basket - See values
     When the client clicks on a product's image in new arrivals section
-    Then the client is on the book page and can add it to the basket
+    When the client clicks on Add to Basket button
+    When the client clicks on Item button on navbar
+    Then the client can view the Total and Subtotal values
 
-  @reviews
-  Scenario: Products have Reviews
+  @CheckApplyCoupon
+  Scenario: Add to Basket - See Apply Coupon
     When the client clicks on a product's image in new arrivals section
-    When the client clicks on Reviews button
-    Then the product's review are shown
+    When the client clicks on Add to Basket button
+    When the client clicks on Item button on navbar
+    Then the client can view the Apply Coupon button
+
+  @PlaceAnOrder
+  Scenario: Place an Order
+    When the client clicks on a product's image in new arrivals section
+    When the client clicks on Add to Basket button
+    When the client clicks on Item button on navbar
+    When the client clicks on Proceed to Checkout button
+    When the client enters their details in the billing form
+    When the client choose check payment method
+    When the client clicks on Place Order button
+    Then Order Details are shown
